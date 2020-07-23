@@ -12683,6 +12683,11 @@ rc@^1.2.7, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-calendly@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-calendly/-/react-calendly-1.0.1.tgz#b09e34b27008eb1ae1b8028d50bb2063a12dca19"
+  integrity sha512-oKJierp80bVd44Ca6gj/O22wIcGk6T6GkX0H5LhiS9kNmasTPDL5wJOJ1RNgVSmh3/bojqOklhUbBlPQKoYALQ==
+
 react-dev-utils@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-4.2.3.tgz#5b42d9ea58d5e9e017a2f57a40a8af408a3a46fb"

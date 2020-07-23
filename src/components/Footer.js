@@ -53,7 +53,7 @@ const Footer = () => (
     `}
     render={(data) => {
       const { name, socialLinks } = data.contentfulAbout;
-
+      console.log('social links', socialLinks)
       return (
         <Box p={[2, 3]} backgroundColor="primaryDark" id="footer">
           <FooterContainer>
@@ -75,13 +75,13 @@ const Footer = () => (
               </TextFooter>
             </Fade>
             <Flex>
-              <Fade right>
+             
                 {socialLinks.map(({ id, ...rest }) => (
                   <Box mx={[2, 3]} fontSize={[4, 5]} key={id}>
                     <SocialLink {...rest} color="background" />
                   </Box>
                 ))}
-              </Fade>
+               
             </Flex>
           </FooterContainer>
         </Box>

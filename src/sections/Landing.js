@@ -1,13 +1,16 @@
 import React, { Fragment } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import { Heading, Flex, Box, Text } from 'rebass/styled-components';
-import TextLoop from 'react-text-loop';
+import { Heading, Flex, Box, Text, Image } from 'rebass/styled-components';
 import { SectionLink } from 'react-scroll-section';
 import Section from '../components/Section';
-import SocialLink from '../components/SocialLink';
 import MouseIcon from '../components/MouseIcon';
 import Triangle from '../components/Triangle';
+import { InlineWidget } from 'react-calendly';
+import styled from 'styled-components';
 
+const ProfilePicture = styled(Image)`
+  transition: all 0.25s ease-out;
+`;
 const Background = () => (
   <div>
     <Triangle
@@ -55,18 +58,17 @@ const LandingPage = () => (
               name
               fontAwesomeIcon
             }
-          }
-          site {
-            siteMetadata {
-              deterministicBehaviour
+            headerImage {
+              title
+              image: resize(width: 450, quality: 100) {
+                src
+              }
             }
           }
         }
       `}
-      render={({ contentfulAbout, site }) => {
-        const { name, socialLinks, roles } = contentfulAbout;
-        const { deterministicBehaviour } = site.siteMetadata;
-
+      render={({ contentfulAbout }) => {
+        const { name, headerImage } = contentfulAbout;
         return (
           <Fragment>
             <Heading
@@ -76,35 +78,48 @@ const LandingPage = () => (
               fontSize={[6, 7]}
               mb={[3, 4, 5]}
             >
-              {`Hello, I'm ${name}!`}
+              {`Hey, I'm ${name}!`}
             </Heading>
+            <Box width={[1, 1, 1 / 2]} px={[1, 2, 4]}>
+              <InlineWidget
+                pageSettings={{
+                  backgroundColor: 'ffffff',
+                  hideEventTypeDetails: true,
+                  hideLandingPageDetails: true,
+                  primaryColor: '00a2ff',
+                  textColor: '4d5055',
+                }}
+                prefill={{
+                  customAnswers: {
+                    a1: 'a1',
+                    a10: 'a10',
+                    a2: 'a2',
+                    a3: 'a3',
+                    a4: 'a4',
+                    a5: 'a5',
+                    a6: 'a6',
+                    a7: 'a7',
+                    a8: 'a8',
+                    a9: 'a9',
+                  },
+                  email: 'test@test.com',
+                  firstName: 'Jon',
+                  lastName: 'Snow',
+                  name: 'Jon Snow',
+                }}
+                styles={{ height: 500 }}
+                url="https://calendly.com/amandabelldevelopment/30min"
+              />
+            </Box>
+            <Box width={[1, 1, 1 / 4]} px={[1, 2, 4]}>
+              <ProfilePicture
+                src={headerImage.image.src}
+                alt={headerImage.title}
+                mt={[4, 4, 0]}
+                ml={[0, 0, 1]}
+              />
+            </Box>
 
-            <Heading
-              as="h2"
-              color="primary"
-              fontSize={[5, 6]}
-              mb={[3, 5]}
-              textAlign="center"
-              style={centerHorizontally}
-            >
-              <TextLoop interval={5000}>
-                {roles
-                  .sort(() => deterministicBehaviour || Math.random() - 0.5)
-                  .map((text) => (
-                    <Text width={[300, 500]} key={text}>
-                      {text}
-                    </Text>
-                  ))}
-              </TextLoop>
-            </Heading>
-
-            <Flex alignItems="center" justifyContent="center" flexWrap="wrap">
-              {socialLinks.map(({ id, ...rest }) => (
-                <Box mx={3} fontSize={[5, 6, 6]} key={id}>
-                  <SocialLink {...rest} />
-                </Box>
-              ))}
-            </Flex>
             <SectionLink section="about">
               {({ onClick }) => <MouseIcon onClick={onClick} />}
             </SectionLink>
